@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<navigator class="search" url="pages/search/index">搜索</navigator>
+		<navigator class="search" url="/pages/search/index">搜索</navigator>
 	</view>
 </template>
 

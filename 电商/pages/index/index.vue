@@ -1,37 +1,58 @@
 <template>
 	<view class="home">
-		<search></search>
+		<asearch></asearch>
+		<view class="banner">
+			<swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="500">
+				
+				<swiper-item v-for="(ite , index ) in banner" :key="index">
+					<image :src="ite.image_src" mode="widthFix"></image>
+				</swiper-item>
+				
+			</swiper>
+		</view>
 		
-		<view class="intro">本项目已包含uni ui组件，无需import和注册，可直接使用。在代码区键入字母u，即可通过代码助手列出所有可用组件。光标置于组件名称处按F1，即可查看组件文档。</view>
-	
-		<navigator url="pages/search/index" >
-		        <button type="default">跳转到新页面</button>
-		</navigator>
+		
 	</view>
 </template>
 
 <script>
-	import search from '../../components/search.vue';
+	import asearch from '../../components/search.vue';
 	export default {
+		components:{
+			asearch
+		},
 		data() {
 			return {
-				
+				banner:[]
 			}
 		},
-		methods: {
-
+		onLoad(){
+			this.getbanner();
 		},
-		components:{
-			search
+		methods: {
+			getbanner(){
+				// uni.request({
+				// 	url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata",
+				// }).then(res=>{
+				// 	console.log(res[1].data.message);
+				// 	this.banner = res[1].data.message;
+				// });
+				this.request({
+					url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata",
+				}).then(res=>{
+					console.log(res);
+				})
+			}
 		}
+
 	}
 </script>
 
 <style lang="scss">
-	.container {
-		padding: 20px;
-		font-size: 14px;
-		line-height: 24px;
-		color:$bgcolor;
+	.home{
+		.banner{
+			.swiper{width: 750rpx;height:340rpx}
+			image{width: 100%;}
+		}
 	}
 </style>
