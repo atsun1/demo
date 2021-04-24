@@ -1,4 +1,5 @@
-export const req = (params)=>{
+
+export default (params)=>{
 	return new Promise((resolve,reject)=>{
 		uni.request({
 			...params,
