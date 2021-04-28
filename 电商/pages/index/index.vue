@@ -31,16 +31,12 @@
 		},
 		methods: {
 			getbanner(){
-				// uni.request({
-				// 	url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata",
-				// }).then(res=>{
-				// 	console.log(res[1].data.message);
-				// 	this.banner = res[1].data.message;
-				// });
-				this.request({
-					url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata",
+
+				this.req({
+					url:"/api/public/v1/home/swiperdata",
 				}).then(res=>{
 					console.log(res);
+					this.banner = res.data.message
 				})
 			}
 		}
