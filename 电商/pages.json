@@ -4,7 +4,7 @@
 			"path": "pages/index/index"
 		},
 		{
-			"path": "pages/catgory/index"
+			"path": "pages/category/main"
 		},
 		{
 			"path": "pages/goods_list/index"
@@ -42,7 +42,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "手写电商",
+		"navigationBarTitleText": "练手",
 		"navigationBarBackgroundColor": "#eb4450",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
@@ -59,7 +59,7 @@
 				"text": "首页"
 			},
 			{
-				"pagePath":"pages/catgory/index",
+				"pagePath":"pages/category/main",
 				"iconPath":"static/tabbar/2.png",
 				"selectedIconPath": "static/tabbar/2-2.png",
 				"text": "分类"
