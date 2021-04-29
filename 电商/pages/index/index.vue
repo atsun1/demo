@@ -23,8 +23,8 @@
 				<view class="ftitle">
 					<image></image>
 				</view>
-				<view>
-					
+				<view class="fson">
+					<image></image>
 				</view>
 			</view>
 			
