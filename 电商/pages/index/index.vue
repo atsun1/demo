@@ -19,12 +19,12 @@
 		</view>
 		<view class="floor">
 			
-			<view class="flist">
+			<view class="flist" v-for="(ite1 , index) in floordata" :key="index">
 				<view class="ftitle">
-					<image></image>
+					<image :src="ite1.floor_title.image_src" mode="widthFix"></image>
 				</view>
-				<view class="fson">
-					<image></image>
+				<view class="fson" v-for="(ite2 , index) in ite1.product_list" :key="index">
+					<image :src="ite2.image_src" mode="widthFix"></image>
 				</view>
 			</view>
 			
@@ -87,10 +87,29 @@
 			image{width: 100%;}
 		}
 		.homenav{
+			margin-top: 20rpx;
 			border:none;
 			text-align: center;
 			align-items: center;
 			image{width: 90%;}
+		}
+		.floor{
+			margin-top: 20rpx;
+			.ftitle{
+				width: 750rpx;
+				height:59rpx;
+				image{width:100%}
+			}
+			.fson{
+				width: 33%;
+				display: grid;
+				image{
+					width: 100%;
+					// border:2rpx solid #fff;
+					
+					}
+				
+			}
 		}
 	}
 </style>
