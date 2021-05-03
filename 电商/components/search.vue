@@ -12,10 +12,13 @@
 	.search{
 		// background-color: $bgcolor;
 		border:5px solid $bgcolor;
-		padding:5px;
+		// padding:5px;
 		font-size: 26rpx;
+		line-height:60rpx;
+		height:60rpx;
 		color:#888;
 		text-align: center;
+		
 		
 	}
 </style>

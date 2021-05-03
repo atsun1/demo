@@ -3,7 +3,7 @@ const serve = 'https://api-hmugo-web.itheima.net';
 
 export default (params)=>{
 
-console.log(serve+params.url)
+console.log(serve+params.url,params.data)
 	return new Promise((resolve,reject)=>{
 
 		uni.request({

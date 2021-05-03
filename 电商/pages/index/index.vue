@@ -1,6 +1,6 @@
 <template>
 	<view class="home">
-		<asearch></asearch>
+		<search></search>
 		<view class="banner">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="500">
 				<swiper-item v-for="(ite , index ) in banner" :key="index">
@@ -18,13 +18,15 @@
 			</uni-grid>
 		</view>
 		<view class="floor">
-			
+
 			<view class="flist" v-for="(ite1 , index) in floordata" :key="index">
 				<view class="ftitle">
 					<image :src="ite1.floor_title.image_src" mode="widthFix"></image>
 				</view>
 				<view class="fson" v-for="(ite2 , index) in ite1.product_list" :key="index">
-					<image :src="ite2.image_src" mode="widthFix"></image>
+					<navigator :url="ite2.navigator_url" :open-type="ite2.open_type">
+						<image :src="ite2.image_src" mode="" ></image>
+					</navigator>
 				</view>
 			</view>
 			
@@ -33,10 +35,10 @@
 </template>
 
 <script>
-	import asearch from '../../components/search.vue';
+	import search from '../../components/search.vue';
 	export default {
 		components:{
-			asearch
+			search
 		},
 		data() {
 			return {
@@ -95,20 +97,30 @@
 		}
 		.floor{
 			margin-top: 20rpx;
+			.flist{
+				margin-top: 20rpx;
+				overflow: hidden;
+			}
 			.ftitle{
+				float: left;
 				width: 750rpx;
 				height:59rpx;
 				image{width:100%}
 			}
 			.fson{
-				width: 33%;
-				display: grid;
+				width: 33.3%;
+				height:200rpx;
+				float:left;
+				navigator{height: 100%;width: 100%;}
 				image{
+					box-sizing: border-box;
+					border:1px solid #fff;
 					width: 100%;
-					// border:2rpx solid #fff;
-					
-					}
-				
+					height: 100%;
+				}
+			}
+			.fson:nth-child(2){
+				height:400rpx;
 			}
 		}
 	}
