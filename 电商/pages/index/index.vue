@@ -24,7 +24,7 @@
 					<image :src="ite1.floor_title.image_src" mode="widthFix"></image>
 				</view>
 				<view class="fson" v-for="(ite2 , index) in ite1.product_list" :key="index">
-					<navigator :url="ite2.navigator_url" :open-type="ite2.open_type">
+					<navigator :url="ite2.cat_id" :open-type="ite2.open_type">
 						<image :src="ite2.image_src" mode="" ></image>
 					</navigator>
 				</view>

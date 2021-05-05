@@ -11,7 +11,7 @@
 				<view v-for="(ite1 , index) in catelist" :key="index" class="title">
 						<view style="width: 100%;margin:30rpx 0 20rpx 0;font-weight: bold;font-size: 32rpx;">/{{ite1.cat_name}}/</view>
 						<view v-for="(ite2 , ind) in ite1.children" :key="ind" class="child">
-							<navigator url="">
+							<navigator :url="'/pages/goods_list/index?cid='+ite2.cat_id">
 								<image :src="ite2.cat_icon"  mode="widthFix"></image>
 								<text>{{ite2.cat_name}}</text>
 							</navigator>
