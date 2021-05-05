@@ -1,13 +1,23 @@
 <template>
-	<view>
+	<view @head>
 		<search></search>
 		<tabs :tabdata="tabs" @tabid="tabid">
-			<block v-if="tabs[0].isAct">1</block>
+			<block v-if="tabs[0].isAct">
+				<view v-for="(ite , index) in goodslist" :key="index" class="tabbox">
+					<view class="img">
+						
+						<image v-if="ite.goods_small_logo" :src="ite.goods_small_logo" mode="widthFix"></image>
+						<image v-if="!ite.goods_small_logo" src="@/static/noneimg.jpg"></image>
+					</view>
+					<view class="info">
+						<view class="gname">{{ite.goods_name}}</view>
+						<view class="pic">￥{{ite.goods_price}}</view>
+					</view>
+				</view>
+			</block>
 			<block v-if="tabs[1].isAct">2</block>
 			<block v-if="tabs[2].isAct">3</block>
-
 		</tabs>
-		
 	</view>
 </template>
 
@@ -38,13 +48,44 @@
 						isAct:false,
 					}
 				],
+				params:{
+					query:'',
+					cid:'',
+					pagenum:1,
+					pagesize:10
+					
+				},
+				goodslist:[],
+				total:'',
 			}
 		},
 		onLoad(e){
 			console.log(e);
+			this.params.cid = e.cid;
+			this.getlist();
+		},
+		onReachBottom(){
+			console.log('触底',this.goodslist.length,this.total)
+			if(this.goodslist.length !== this.total){	
+				this.params.pagenum++;
+				this.getlist();
+			}else{
+				console.log('注满了')
+			}
 		},
 		methods:{
+			getlist(){
+				this.req({
+					url:'/api/public/v1/goods/search',
+					data:this.params,
+				}).then(res=>{
+					console.log(res);
+					this.total = res.data.message.total;
+					this.goodslist =[...this.goodslist,...res.data.message.goods];
+				})
+			},
 			tabid(id){
+				
 				// console.log(id);
 				this.tabs.map(
 					(ite)=>{
@@ -57,5 +98,24 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	.tabbox{
+		display: flex;
+		.img{
+			flex:2;
+			padding:5px;
+			image{width: 100%;height:100%}
+		}
+		.info{
+			flex:3;
+			font-size: 26rpx;
+			padding:50rpx 10rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.pic{
+				color:red
+			}
+		}
+	}
 </style>

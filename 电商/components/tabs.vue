@@ -5,7 +5,7 @@
 				{{ite.value}}
 			</view>
 		</view>
-		<view class="tabbox">
+		<view>
 			<slot></slot>
 		</view>
 	</view>
@@ -42,5 +42,6 @@
 			color:red;
 			border-bottom:2px solid red;
 		}
+		
 	}
 </style>
