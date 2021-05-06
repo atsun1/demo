@@ -7,7 +7,7 @@
 					<view class="img">
 						
 						<image v-if="ite.goods_small_logo" :src="ite.goods_small_logo" mode="widthFix"></image>
-						<image v-if="!ite.goods_small_logo" src="@/static/noneimg.jpg"></image>
+						<image v-if="!ite.goods_small_logo" src="@/static/noneimg.jpg" mode="widthFix"></image>
 					</view>
 					<view class="info">
 						<view class="gname">{{ite.goods_name}}</view>
@@ -66,12 +66,23 @@
 		},
 		onReachBottom(){
 			console.log('触底',this.goodslist.length,this.total)
-			if(this.goodslist.length !== this.total){	
+			if(this.goodslist.length < this.total){	
 				this.params.pagenum++;
 				this.getlist();
 			}else{
-				console.log('注满了')
+				uni.showToast({
+				    title: '没有更多了',
+					icon:'none',
+				});
 			}
+		},
+		onPullDownRefresh(){
+			this.params.pagenum = 1;
+			this.goodslist=[];
+			this.getlist();
+			setTimeout(()=>{
+				uni.stopPullDownRefresh();
+			},1000)
 		},
 		methods:{
 			getlist(){
@@ -85,12 +96,9 @@
 				})
 			},
 			tabid(id){
-				
-				// console.log(id);
 				this.tabs.map(
 					(ite)=>{
 						ite.id === id?ite.isAct=true:ite.isAct=false
-						// console.log(ite,i);
 					}
 				)
 			}
@@ -104,7 +112,7 @@
 		.img{
 			flex:2;
 			padding:5px;
-			image{width: 100%;height:100%}
+			image{width: 100%;}
 		}
 		.info{
 			flex:3;
