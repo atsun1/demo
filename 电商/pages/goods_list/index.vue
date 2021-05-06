@@ -3,16 +3,17 @@
 		<search></search>
 		<tabs :tabdata="tabs" @tabid="tabid">
 			<block v-if="tabs[0].isAct">
-				<view v-for="(ite , index) in goodslist" :key="index" class="tabbox">
-					<view class="img">
-						
-						<image v-if="ite.goods_small_logo" :src="ite.goods_small_logo" mode="widthFix"></image>
-						<image v-if="!ite.goods_small_logo" src="@/static/noneimg.jpg" mode="widthFix"></image>
-					</view>
-					<view class="info">
-						<view class="gname">{{ite.goods_name}}</view>
-						<view class="pic">￥{{ite.goods_price}}</view>
-					</view>
+				<view v-for="(ite , index) in goodslist" :key="index" >
+					<navigator :url="'/pages/goods_detail/index?goods_id='+ite.goods_id" class="tabbox">
+						<view class="img">
+							<image v-if="ite.goods_small_logo" :src="ite.goods_small_logo" mode="widthFix"></image>
+							<image v-if="!ite.goods_small_logo" src="@/static/noneimg.jpg" mode="widthFix"></image>
+						</view>
+						<view class="info">
+							<view class="gname">{{ite.goods_name}}</view>
+							<view class="pic">￥{{ite.goods_price}}</view>
+						</view>
+					</navigator>
 				</view>
 			</block>
 			<block v-if="tabs[1].isAct">2</block>
