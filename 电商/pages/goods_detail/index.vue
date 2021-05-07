@@ -2,12 +2,11 @@
 	<view class="goodsinfo">
 		<view class="banner">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" interval="3000" duration="500" circular="true">
-				<swiper-item v-for="(ite , index) in goodsinfo.pics" :key="index">
-					<view class="swiper-item ">
-						<image :src="ite.pics_mid" mode="widthFix"></image>
+				<swiper-item v-for="(ite , index) in goodsinfo.pics" :key="index" >
+					<view class="swiper-item " >
+						<image :src="ite.pics_mid" mode="widthFix" @click="openimg(index)"></image>
 					</view>
 				</swiper-item>
-
 			</swiper>
 		</view>
 		<view  class="price">
@@ -26,18 +25,51 @@
 			<view class="title price">图文详情</view>
 			<rich-text class="content" :nodes="goodsinfo.goods_introduce"></rich-text>
 		</view>
+		<view class="bottom-btns">
+			<uni-goods-nav :fill="true"  :options="options" :buttonGroup="buttonGroup"  @click="onClick" @buttonClick="buttonClick" />
+		</view>
 	</view>
 </template>
 
 <script>
+	import uniGoodsNav from '@/uni_modules/uni-goods-nav/components/uni-goods-nav/uni-goods-nav.vue'
 	export default{
+		components:{
+			uniGoodsNav
+		},
 		onLoad(e){
 			console.log(e);
 			this.getgoodsinfo(e)
 		},
 		data(){
 			return{
-				goodsinfo:[]
+				goodsinfo:[],
+				options: [
+							{
+								icon: 'headphones',
+								text: '客服'
+							}, {
+								icon: 'shop',
+								text: '店铺',
+								info: 2,
+								infoBackgroundColor:'#007aff',
+								infoColor:"red"
+							}, {
+								icon: 'cart',
+								text: '购物车',
+								info: 2
+							}],
+								buttonGroup: [{
+								text: '加入购物车',
+								backgroundColor: '#ff0000',
+								color: '#fff'
+							},
+							{
+								text: '立即购买',
+								backgroundColor: '#ffa200',
+								color: '#fff'
+							}
+				        ]
 			}
 		},
 		methods:{
@@ -49,6 +81,28 @@
 					console.log(res.data.message)
 					this.goodsinfo = res.data.message
 				})
+			},
+			openimg(index){
+				let urls = [];
+				this.goodsinfo.pics.map(v=>{
+							urls.push(v.pics_mid)
+						});
+				console.log(urls)
+				uni.previewImage({
+					current:index,
+					urls:urls,
+					loop:true,
+				})
+			},
+			onClick (e) {
+			        uni.showToast({
+			          title: `点击${e.content.text}`,
+			          icon: 'none'
+			        })
+			},
+			buttonClick (e) {
+				console.log(e)
+				this.options[2].info++
 			}
 		}
 	}
@@ -82,6 +136,7 @@
 			border-bottom: 5px solid #dedede;
 			.name{
 				flex:8;
+				padding:0px 10rpx;
 			}
 			.stars{		
 				border-left:1px solid #999;
@@ -89,13 +144,11 @@
 				text-align: center;
 			}
 		}
-		.goods_content{
-			.title{
-				border-bottom: 1px solid #666;
-			}
-			.content{
-				
-			}
+		.goods_content{margin-bottom: 50px;}
+		.bottom-btns{
+			position:fixed;
+			bottom:0px;
+			width: 100%;
 		}
 	}
 </style>

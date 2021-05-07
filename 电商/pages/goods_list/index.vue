@@ -98,7 +98,7 @@
 			},
 			tabid(id){
 				this.tabs.map(
-					(ite)=>{
+					ite=>{
 						ite.id === id?ite.isAct=true:ite.isAct=false
 					}
 				)
