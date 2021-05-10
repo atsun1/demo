@@ -51,15 +51,18 @@
 							}, {
 								icon: 'shop',
 								text: '店铺',
-								info: 2,
-								infoBackgroundColor:'#007aff',
-								infoColor:"red"
-							}, {
+								// info: 2,
+								// infoBackgroundColor:'#007aff',
+								// infoColor:"red"
+							}, 
+							{
 								icon: 'cart',
 								text: '购物车',
-								info: 2
-							}],
-								buttonGroup: [{
+								// info: 2
+							},
+				],
+				buttonGroup: [
+							{
 								text: '加入购物车',
 								backgroundColor: '#ff0000',
 								color: '#fff'
@@ -69,7 +72,7 @@
 								backgroundColor: '#ffa200',
 								color: '#fff'
 							}
-				        ]
+				]
 			}
 		},
 		methods:{
@@ -95,14 +98,52 @@
 				})
 			},
 			onClick (e) {
+				if(e.index == 0){
+					console.log('客服')
+				};
+				if(e.index == 1){
+					console.log('店铺')
+				};
+				if(e.index == 2){
+					console.log('购物车')
+					uni.switchTab({
+					    url: '/pages/cart/index'
+					});
+					
+				};
+				
 			        uni.showToast({
 			          title: `点击${e.content.text}`,
 			          icon: 'none'
 			        })
 			},
 			buttonClick (e) {
-				console.log(e)
-				this.options[2].info++
+				console.log(e);
+				if(e.index == 0){
+					// console.log('购物车')
+					let cart = uni.getStorageSync("cart")||[];
+					// let cart = uni.getStorageSync("cart")? uni.getStorageSync("cart") : [];
+					let index = cart.findIndex(v=>v.goods_id == this.goodsinfo.goods_id);
+					if(index === -1){
+						console.log('不存在，第一次添加',cart,index)
+						this.goodsinfo.num = 1;
+						cart.push(this.goodsinfo)
+					}else{
+						console.log('已存在 数组++',index)
+						cart[index].num++;
+					}
+					uni.setStorageSync("cart",cart);
+					uni.showToast({
+						title:'加入成功',
+						icon:'success',
+						mask:true
+					})
+				};
+				if(e.index == 1){
+					let cart = uni.getStorageSync("cart")
+					console.log(cart)
+				};
+				// this.options[2].info++
 			}
 		}
 	}
