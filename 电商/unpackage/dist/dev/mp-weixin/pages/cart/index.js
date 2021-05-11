@@ -141,22 +141,25 @@ var _default =
 {
   data: function data() {
     return {
-      cart: [] };
+      cart: [],
+      address: {} };
 
   },
   onLoad: function onLoad() {
     var cart = uni.getStorageSync("cart");
     this.cart = cart;
     console.log(cart);
+    console.log(this.address);
   },
   methods: {
-    getAddress: function getAddress() {
+    getAddress: function getAddress() {var _this = this;
       console.log('微信下有效');
 
       // 需条件编译的代码
       uni.chooseAddress({
         success: function success(res) {
-          console.log(res);
+          _this.address = res;
+          console.log(_this.address);
         } });
 
 

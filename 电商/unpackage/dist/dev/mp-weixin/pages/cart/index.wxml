@@ -1,1 +1,1 @@
-<view class="crat"><view class="address"><button data-event-opts="{{[['tap',[['getAddress']]]]}}" bindtap="__e">获取地址</button></view></view>
+<view class="crat"><view class="address"><block wx:if="{{!address.userName}}"><button data-event-opts="{{[['tap',[['getAddress']]]]}}" bindtap="__e">获取地址</button></block><block wx:else><view>地址详情</view></block></view></view>
