@@ -1,0 +1,1 @@
+<view><view class="tabs"><block wx:for="{{tabdata}}" wx:for-item="ite" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['rank',['$0'],[[['tabdata','',index,'id']]]]]]]}}" class="{{[(ite.isAct)?'act':'']}}" bindtap="__e">{{''+ite.value+''}}</view></block></view><view><slot></slot></view></view>

@@ -1,0 +1,1 @@
+<view class="crat"><view class="address"><button data-event-opts="{{[['tap',[['getAddress']]]]}}" bindtap="__e">获取地址</button></view></view>

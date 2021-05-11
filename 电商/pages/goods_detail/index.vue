@@ -105,7 +105,7 @@
 					console.log('店铺')
 				};
 				if(e.index == 2){
-					console.log('购物车')
+					// console.log('购物车')
 					uni.switchTab({
 					    url: '/pages/cart/index'
 					});
