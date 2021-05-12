@@ -65,7 +65,12 @@
 	.cate{
 		.content{
 			display: flex;
+			
+			height: calc( 100vh - 50px);
+			
+			/* #ifdef H5 */
 			height: calc( 100vh - 150px);
+			/* #endif */
 			
 			.left{
 				text-align: center;

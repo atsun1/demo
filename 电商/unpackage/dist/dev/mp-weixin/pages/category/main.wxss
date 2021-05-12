@@ -28,7 +28,7 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  height: calc( 100vh - 150px);
+  height: calc( 100vh - 50px);
 }
 .cate .content .left {
   text-align: center;
