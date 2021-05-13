@@ -12,11 +12,11 @@
 				购物车
 			</view> -->
 			<view class="list" v-for="(ite,index) in cart" :key="index">
-				<view class="check">
+				<checkbox-group  class="check" @change="changecheck(ite.goods_id)">
 					<label>
-						<checkbox  :checked="ite.checked"  />{{ite.checked}}
+						<checkbox :target="index" :checked="ite.checked"  />{{index}}
 					</label>
-				</view>
+				</checkbox-group>
 				<view class="img">
 					<image :src="ite.goods_small_logo" mode="widthFix"></image>
 				</view>
@@ -34,11 +34,11 @@
 			</view>
 		</view>
 		<view class="footer">
-			<view class="check">
+			<checkbox-group @change="allchecked" class="check">
 				<label>
 					<checkbox :checked="allcheck" /><text>全选</text>
 				</label>
-			</view>
+			</checkbox-group>
 			<view class="total">
 				<view>合计：￥{{total}}</view>
 			</view>
@@ -58,19 +58,7 @@
 			}
 		},
 		onShow(){
-			let cart = uni.getStorageSync("cart")||[]
-			let  allcheck = cart.length?cart.every(v=>v.checked):false
-			this.allcheck = allcheck;
-			 cart.forEach(v=>{
-					if(v.checked){
-						this.total += v.num * v.goods_price
-						console.log(this.total,v.goods_price * v.num)
-					}
-				})
-			
-			
-			this.cart = cart;
-			console.log(cart,allcheck,this.total);
+			this.update()
 		},
 		methods:{
 			getAddress(){
@@ -84,6 +72,44 @@
 					}
 				})
 				//#endif
+			},
+			update(){
+				let cart = uni.getStorageSync("cart")||[]
+				let  allcheck = cart.length?cart.every(v=>v.checked):false
+				this.allcheck = allcheck;
+				this.total = 0;
+				cart.forEach(v=>{
+					if(v.checked){
+						this.total += v.num * v.goods_price
+						// console.log(this.total,v.goods_price * v.num)
+					}
+				})
+				this.cart = cart;
+				// console.log(cart,allcheck,this.total);
+				uni.setStorageSync("cart",cart)
+			},
+			changecheck(e){
+				let cart = uni.getStorageSync("cart")||[]
+				// console.log(cart)
+				let index =cart.findIndex(v=>v.goods_id ==e);
+				// console.log(index)
+				cart[index].checked = !cart[index].checked;
+				// this.cart = cart;
+				uni.setStorageSync("cart",cart);
+				this.update();
+			},
+			
+			allchecked(e){
+				console.log(e,this.allcheck)
+				this.allcheck = !this.allcheck;
+				this.cart.map(v=>v.checked=this.allcheck)
+				// if(this.allcheck){
+				// 	cart.map(v=>v.checked=false)
+				// }else{
+				// 	cart.map(v=>v.checked=true)
+				// }
+				uni.setStorageSync("cart",this.cart);
+				// this.update();
 			}
 		},
 		
