@@ -13,7 +13,9 @@
 			</view> -->
 			<view class="list" v-for="(ite,index) in cart" :key="index">
 				<view class="check">
-					<checkbox :value="index"></checkbox>
+					<label>
+						<checkbox  :checked="ite.checked"  />{{ite.checked}}
+					</label>
 				</view>
 				<view class="img">
 					<image :src="ite.goods_small_logo" mode="widthFix"></image>
@@ -34,12 +36,11 @@
 		<view class="footer">
 			<view class="check">
 				<label>
-					<checkbox /><text>全选</text>
+					<checkbox :checked="allcheck" /><text>全选</text>
 				</label>
 			</view>
 			<view class="total">
-				<view>合计：22222</view>
-				<view>0</view>
+				<view>合计：￥{{total}}</view>
 			</view>
 			<view class="sub">结算</view>
 		</view>
@@ -52,16 +53,24 @@
 			return{
 				cart:[],
 				address:{},
+				allcheck:false,
+				total:0,
 			}
 		},
-		onLoad() {
-			
-		},
 		onShow(){
-			let cart = uni.getStorageSync("cart")
+			let cart = uni.getStorageSync("cart")||[]
+			let  allcheck = cart.length?cart.every(v=>v.checked):false
+			this.allcheck = allcheck;
+			 cart.forEach(v=>{
+					if(v.checked){
+						this.total += v.num * v.goods_price
+						console.log(this.total,v.goods_price * v.num)
+					}
+				})
+			
+			
 			this.cart = cart;
-			console.log(cart);
-			console.log(this.address)
+			console.log(cart,allcheck,this.total);
 		},
 		methods:{
 			getAddress(){
@@ -83,7 +92,7 @@
 
 <style lang="scss">
 	.cart{
-		
+		padding-bottom:100rpx;
 		.address{
 			height:100rpx;
 			display: flex;
@@ -153,6 +162,7 @@
 			left:0;
 			width: 100%;
 			padding-bottom: var(--window-bottom);
+			background-color: #fff;
 			display: flex;
 			justify-content: center;
 			align-items: center;

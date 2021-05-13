@@ -126,6 +126,9 @@
 					let index = cart.findIndex(v=>v.goods_id == this.goodsinfo.goods_id);
 					if(index === -1){
 						console.log('不存在，第一次添加',cart,index)
+						// 增加选中状态数据
+						this.goodsinfo.checked =true;
+						// 增加数量缓存
 						this.goodsinfo.num = 1;
 						cart.push(this.goodsinfo)
 					}else{
