@@ -14,7 +14,7 @@
 			<view class="list" v-for="(ite,index) in cart" :key="index">
 				<checkbox-group  class="check" @change="changecheck(ite.goods_id)">
 					<label>
-						<checkbox :target="index" :checked="ite.checked"  />{{index}}
+						<checkbox :target="index" :checked="ite.checked"  />
 					</label>
 				</checkbox-group>
 				<view class="img">
