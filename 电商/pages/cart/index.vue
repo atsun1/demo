@@ -25,9 +25,9 @@
 					<view class="pAndb">
 						<view class="price">￥{{ite.goods_price}}</view>
 						<view class="btns">
-							<text class="btn" >-</text>
+							<text class="btn" @click="reduce(ite.goods_id)" >-</text>
 							<text>{{ite.num}}</text>
-							<text class="btn" >+</text>
+							<text class="btn" @click="add(ite.goods_id)">+</text>
 						</view>
 					</view>
 				</view>
@@ -109,7 +109,28 @@
 				// 	cart.map(v=>v.checked=true)
 				// }
 				uni.setStorageSync("cart",this.cart);
-				// this.update();
+				this.update();
+			},
+			reduce(id){
+				console.log(id,'--')
+				let cart = uni.getStorageSync("cart")||[]
+				let index =cart.findIndex(v=>v.goods_id ==id);
+				if(cart[index].num>1){
+					cart[index].num--;
+				}else{
+					cart[index].remove();
+				}
+				
+				uni.setStorageSync("cart",cart);
+				this.update();
+			},
+			add(id){
+				console.log(id,'++')
+				let cart = uni.getStorageSync("cart")||[]
+				let index =cart.findIndex(v=>v.goods_id ==id);
+				cart[index].num++;
+				uni.setStorageSync("cart",cart);
+				this.update();
 			}
 		},
 		
