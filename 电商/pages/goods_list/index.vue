@@ -1,5 +1,5 @@
 <template>
-	<view @head>
+	<view>
 		<search></search>
 		<tabs :tabdata="tabs" @tabid="tabid">
 			<block v-if="tabs[0].isAct">

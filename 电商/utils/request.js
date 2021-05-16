@@ -9,12 +9,13 @@ uni.showLoading({
 	mask:true,
 });
 
-console.log(serve+params.url,params.data)
+console.log(params,params.url,params.data)
 	return new Promise((resolve,reject)=>{
 
 		uni.request({
 			url : serve + params.url,
 			data : params.data,
+			method:params.method,
 			success:(res)=>{
 				resolve(res);
 			},

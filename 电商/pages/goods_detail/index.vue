@@ -139,7 +139,7 @@
 					uni.showToast({
 						title:'加入成功',
 						icon:'success',
-						mask:true
+						// mask:true
 					})
 				};
 				if(e.index == 1){

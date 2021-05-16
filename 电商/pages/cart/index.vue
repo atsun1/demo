@@ -1,38 +1,37 @@
 <template>
 	<view class="cart">
-		<view class="address">
-			<button size="mini" @click="getAddress()" v-if="!address.userName">获取地址</button>
-			<view v-else>
-				<view>{{address.provinceName}} {{address.cityName}} {{address.countyName}} {{address.detailInfo}} </view>
-				<view>{{address.userName}} {{address.telNumber}}</view>
-			</view>
-		</view>
-		<view class="cart_list">
-			<!-- <view class="title">
-				购物车
-			</view> -->
-			<view class="list" v-for="(ite,index) in cart" :key="index">
-				<checkbox-group  class="check" @change="changecheck(ite.goods_id)">
-					<label>
-						<checkbox :target="index" :checked="ite.checked"  />
-					</label>
-				</checkbox-group>
-				<view class="img">
-					<image :src="ite.goods_small_logo" mode="widthFix"></image>
-				</view>
-				<view class="info">
-					<view class="name">{{ite.goods_name}}</view>
-					<view class="pAndb">
-						<view class="price">￥{{ite.goods_price}}</view>
-						<view class="btns">
-							<text class="btn" @click="reduce(ite.goods_id)" >-</text>
-							<text>{{ite.num}}</text>
-							<text class="btn" @click="add(ite.goods_id)">+</text>
+		<view v-if="isShow">
+			<view class="cart_list">
+				<view class="list" v-for="(ite,index) in cart" :key="index">
+					<checkbox-group  class="check" @change="changecheck(ite.goods_id)">
+						<label>
+							<checkbox :target="index" :checked="ite.checked"  />
+						</label>
+					</checkbox-group>
+					<view class="img">
+						<image :src="ite.goods_small_logo" mode="widthFix"></image>
+					</view>
+					<view class="info">
+						<view class="name">{{ite.goods_name}}</view>
+						<view class="pAndb">
+							<view class="price">￥{{ite.goods_price}}</view>
+							<view class="btns">
+								<text class="btn" @click="numedit(ite.goods_id,-1)" >-</text>
+								<text>{{ite.num}}</text>
+								<text class="btn" @click="numedit(ite.goods_id,1)">+</text>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		
+		
+		<view v-if="!isShow" class="nonegoods">
+			<image src="@/static/nonegoods.png" mode="widthFix"></image>
+		</view>
+		
+		
 		<view class="footer">
 			<checkbox-group @change="allchecked" class="check">
 				<label>
@@ -42,9 +41,10 @@
 			<view class="total">
 				<view>合计：￥{{total}}</view>
 			</view>
-			<view class="sub">结算</view>
+			<view class="sub" @click="pay">结算</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
@@ -55,33 +55,30 @@
 				address:{},
 				allcheck:false,
 				total:0,
+				isShow:false,
+				goodsNum:0,
+				
 			}
 		},
 		onShow(){
-			this.update()
+			this.update();
+			
 		},
 		methods:{
-			getAddress(){
-				console.log('微信下有效')
-				//#ifndef H5
-				// 需条件编译的代码
-				uni.chooseAddress({
-					success:res=>{
-						this.address = res;
-						console.log(this.address)
-					}
-				})
-				//#endif
-			},
+	
 			update(){
 				let cart = uni.getStorageSync("cart")||[]
+				//判断是否显示 无购物车内容图片 
+				cart.length?this.isShow=true:this.isShow=false;
 				let  allcheck = cart.length?cart.every(v=>v.checked):false
 				this.allcheck = allcheck;
 				this.total = 0;
+				this.goodsNum = 0;
 				cart.forEach(v=>{
 					if(v.checked){
-						this.total += v.num * v.goods_price
-						// console.log(this.total,v.goods_price * v.num)
+						this.total += v.num * v.goods_price;
+						this.goodsNum += v.num;
+						// console.log(this.total,v.goods_price , v.num)
 					}
 				})
 				this.cart = cart;
@@ -111,26 +108,44 @@
 				uni.setStorageSync("cart",this.cart);
 				this.update();
 			},
-			reduce(id){
-				console.log(id,'--')
+			numedit(id,btn){
+				console.log(id,btn)
 				let cart = uni.getStorageSync("cart")||[]
 				let index =cart.findIndex(v=>v.goods_id ==id);
-				if(cart[index].num>1){
-					cart[index].num--;
-				}else{
-					cart[index].remove();
+					cart[index].num += btn;
+				if(cart[index].num==0){
+					uni.showModal({
+					    title: '确认移除该商品吗',
+					    success: (res)=> {
+					        if (res.confirm) {
+								cart.splice(index,1);
+					        } else if (res.cancel) {
+					            cart[index].num = 1
+					        }
+					    },
+						complete:()=>{
+							uni.setStorageSync("cart",cart);
+							this.update();
+						}
+					});
 				}
-				
 				uni.setStorageSync("cart",cart);
 				this.update();
 			},
-			add(id){
-				console.log(id,'++')
-				let cart = uni.getStorageSync("cart")||[]
-				let index =cart.findIndex(v=>v.goods_id ==id);
-				cart[index].num++;
-				uni.setStorageSync("cart",cart);
-				this.update();
+		
+			pay(){
+				if(!this.goodsNum){
+					uni.showToast({
+						title:'你的购物车空空如也',
+						icon:'none'
+					})
+					return
+				}
+				uni.navigateTo({
+					url:'/pages/pay/index'
+				})
+				
+				// this.update();
 			}
 		},
 		
@@ -139,21 +154,16 @@
 
 <style lang="scss">
 	.cart{
-		padding-bottom:100rpx;
-		.address{
-			height:100rpx;
+		.nonegoods{
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			font-size: 28rpx;
-			
+			height:80vh;
+				image{width: 100%;}
 		}
+
 		.cart_list{
-			border-top: 1px solid $bgcolor;
-			// .title{
-			// 	margin:30rpx 40rpx;
-			// 	font-size: 34rpx;
-			// }
+	
 			.list{
 				display: flex;
 				justify-content: center;
@@ -198,14 +208,12 @@
 						}
 					}
 				}
-				
-				
-				
+
 			}
 		}
 		.footer{
 			position:fixed;
-			bottom:0;
+			bottom:0rpx;
 			left:0;
 			width: 100%;
 			padding-bottom: var(--window-bottom);
@@ -224,6 +232,8 @@
 				flex:5;
 				text-align:right;
 				padding:0 20rpx;
+				color:$bgcolor;
+				font-weight: bold;
 			}
 			.sub{
 				display: flex;
@@ -235,6 +245,7 @@
 				color:#fff;
 			}
 		}
+	
 	}
 	
 </style>

@@ -1,1 +1,1 @@
-<view class="_div"></view>
+<view><button type="default" open-type="getUserInfo" data-event-opts="{{[['getuserinfo',[['userinfo',['$event']]]]]}}" bindgetuserinfo="__e">获取授权</button><button type="default" open-type="getPhoneNumber" data-event-opts="{{[['getphonenumber',[['usernumber',['$event']]]]]}}" bindgetphonenumber="__e">获取手机号</button></view>
