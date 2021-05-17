@@ -17,9 +17,9 @@
 				{{goodsinfo.goods_name}}
 			</view>
 			<view class="stars">
-				<view @click="star" >
+				<view @click="star(goodsinfo.goods_id)" >
 					<uni-icons type="star" size="20" color="#999" ></uni-icons>
-					<uni-icons type="star-filled" size="20" color="#EB4450" ></uni-icons>
+					<!-- <uni-icons type="star-filled" size="20" color="#EB4450" ></uni-icons> -->
 					<view>收藏</view>
 				</view>
 			</view>
@@ -120,19 +120,20 @@
 			          icon: 'none'
 			        })
 			},
-			star(){
+			star(id){
+				console.log(this.goodsinfo)
 				let starlist = uni.getStorageSync("starlist")||[];
-				// this.goodsinfo.star
+				let index = starlist.findIndex(v=>v.goods_id == id)
 				if(!this.goodsinfo.star){
 					this.goodsinfo.star=true
-					
-					starlist.push(this.goodsinfo)
-					console.log('收藏，数组加一')
-					starlist.filter(()=>
-						 self.indexOf(element) == index
-					)
+						if(index === -1||0){
+							starlist.push(this.goodsinfo)
+							console.log('收藏，数组加一')
+						}
 				}else{
 					this.goodsinfo.star=false
+					starlist.splice(index,1);
+					console.log('删除收藏')
 				}
 				console.log(starlist)
 				uni.setStorageSync("starlist",starlist)
