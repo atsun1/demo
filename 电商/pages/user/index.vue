@@ -17,25 +17,25 @@
 			<!-- 四个常用按钮 -->
 			<view class="orderedit">
 				<view>
-					<navigator url="/pages/order/index?type=1">
+					<navigator url="/pages/order/index?type=0">
 						<uni-icons type="settings" size="30"></uni-icons>
 						<view>全部订单</view>
 					</navigator>
 				</view>
 				<view>
-					<navigator url="/pages/order/index?type=2">
+					<navigator url="/pages/order/index?type=1">
 						<uni-icons type="info" size="30"></uni-icons>
 						<view>待付款</view>
 					</navigator>
 				</view>
 				<view>
-					<navigator url="/pages/order/index?type=3">
+					<navigator url="/pages/order/index?type=2">
 						<uni-icons type="cart-filled" size="30"></uni-icons>
 						<view>待收货</view>
 					</navigator>
 				</view>
 				<view>
-					<navigator url="/pages/order/index?type=4">
+					<navigator url="/pages/order/index?type=3">
 						<uni-icons type="pengyouquan" size="30"></uni-icons>
 						<view>退货/退款</view>
 					</navigator>

@@ -17,8 +17,11 @@
 				{{goodsinfo.goods_name}}
 			</view>
 			<view class="stars">
-				<uni-icons type="star" size="20" color="#999"></uni-icons>
-				<view>收藏</view>
+				<view @click="star" >
+					<uni-icons type="star" size="20" color="#999" ></uni-icons>
+					<uni-icons type="star-filled" size="20" color="#EB4450" ></uni-icons>
+					<view>收藏</view>
+				</view>
 			</view>
 		</view>
 		<view class="goods_content">
@@ -116,6 +119,23 @@
 			          title: `点击${e.content.text}`,
 			          icon: 'none'
 			        })
+			},
+			star(){
+				let starlist = uni.getStorageSync("starlist")||[];
+				// this.goodsinfo.star
+				if(!this.goodsinfo.star){
+					this.goodsinfo.star=true
+					
+					starlist.push(this.goodsinfo)
+					console.log('收藏，数组加一')
+					starlist.filter(()=>
+						 self.indexOf(element) == index
+					)
+				}else{
+					this.goodsinfo.star=false
+				}
+				console.log(starlist)
+				uni.setStorageSync("starlist",starlist)
 			},
 			buttonClick (e) {
 				console.log(e);
