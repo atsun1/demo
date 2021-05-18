@@ -44,10 +44,11 @@
 			<!-- 功能列表 -->
 			<view>
 				<uni-list>
+					<uni-list-item title="收藏列表" clickable show-badge="true" link to="/pages/collect/index" :badge-text="starlength"></uni-list-item>
 				    <uni-list-item title="联系客服" clickable ></uni-list-item>
 				    <uni-list-item title="意见反馈" clickable ></uni-list-item>
 				    <uni-list-item title="关于我们" clickable ></uni-list-item>
-					<uni-list-item title="列表右侧显示角标" :show-badge="true" badge-text="12" ></uni-list-item>
+					<uni-list-item title="列表右侧显示角标" show-badge="true" badge-text="12" ></uni-list-item>
 					<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" ></uni-list-item>
 					<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/vue/index/index"  ></uni-list-item>
 				</uni-list>
@@ -60,8 +61,16 @@
 	export default{
 		data(){
 			return {
-				userdata:{}
+				userdata:{},
+				// starlist:[],
+				starlength:0
 			}
+		},
+		onShow(){
+			let starlist = uni.getStorageSync('starlist')||[]
+			console.log(starlist.length)
+			// this.starlist = starlist
+			this.starlength= starlist.length
 		},
 		methods:{
 			userinfo(e){
@@ -110,12 +119,10 @@
 					image{
 						width: 100%;
 						border-radius: 50%;					
-						}
-				
+					}
 			}
 		}
 		.editbox{
-			
 			.orderedit{
 				display: flex;
 				padding:30rpx 0;
@@ -128,7 +135,6 @@
 					text-align: center;
 				}
 			}
-			
 		}
 	}
 </style>

@@ -2,17 +2,17 @@
 	<view class="cart">
 		<view v-if="isShow">
 			<view class="cart_list">
-				<view class="list" v-for="(ite,index) in cart" :key="index">
+				<view class="list" v-for="(ite,index) in cart" :key="index" >
 					<checkbox-group  class="check" @change="changecheck(ite.goods_id)">
 						<label>
 							<checkbox :target="index" :checked="ite.checked"  />
 						</label>
 					</checkbox-group>
-					<view class="img">
+					<view class="img" @click="gotoinfo(ite.goods_id)">
 						<image :src="ite.goods_small_logo" mode="widthFix"></image>
 					</view>
 					<view class="info">
-						<view class="name">{{ite.goods_name}}</view>
+						<view class="name" @click="gotoinfo(ite.goods_id)">{{ite.goods_name}}</view>
 						<view class="pAndb">
 							<view class="price">￥{{ite.goods_price}}</view>
 							<view class="btns">
@@ -144,8 +144,11 @@
 				uni.navigateTo({
 					url:'/pages/pay/index'
 				})
-				
-				// this.update();
+			},
+			gotoinfo(e){
+				uni.navigateTo({
+					url:'/pages/goods_detail/index?goods_id='+e
+				})
 			}
 		},
 		
@@ -159,7 +162,7 @@
 			justify-content: center;
 			align-items: center;
 			height:80vh;
-				image{width: 100%;}
+				image{width: 60%;}
 		}
 
 		.cart_list{
@@ -202,8 +205,10 @@
 								display: inline-block;
 								border:1px solid #999;
 								height:40rpx;
+								line-height: 40rpx;
 								width:40rpx;
 								margin:0px 10rpx;
+								border-radius: 50%;
 							}
 						}
 					}
