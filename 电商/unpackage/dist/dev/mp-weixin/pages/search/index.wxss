@@ -24,56 +24,38 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.home .banner .swiper {
-  width: 750rpx;
-  height: 340rpx;
+.search .searchbox .tabbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
 }
-.home .banner image {
+.search .searchbox .tabbox .img {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+          flex: 2;
+  padding: 5px;
+}
+.search .searchbox .tabbox .img image {
   width: 100%;
 }
-.home .homenav {
-  margin-top: 20rpx;
-  border: none;
-  text-align: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+.search .searchbox .tabbox .info {
+  -webkit-box-flex: 3;
+  -webkit-flex: 3;
+          flex: 3;
+  font-size: 26rpx;
+  padding: 50rpx 10rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
 }
-.home .homenav image {
-  width: 90%;
-}
-.home .floor {
-  margin-top: 20rpx;
-}
-.home .floor .flist {
-  margin-top: 20rpx;
-  overflow: hidden;
-}
-.home .floor .ftitle {
-  float: left;
-  width: 750rpx;
-  height: 59rpx;
-}
-.home .floor .ftitle image {
-  width: 100%;
-}
-.home .floor .fson {
-  width: 33.3%;
-  height: 200rpx;
-  float: left;
-}
-.home .floor .fson navigator {
-  height: 100%;
-  width: 100%;
-}
-.home .floor .fson image {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border: 1px solid #fff;
-  width: 100%;
-  height: 100%;
-}
-.home .floor .fson:nth-child(2) {
-  height: 400rpx;
+.search .searchbox .tabbox .info .pic {
+  color: red;
 }
 

@@ -69,8 +69,10 @@
 		onShow(){
 			let starlist = uni.getStorageSync('starlist')||[]
 			console.log(starlist.length)
+			// starlist.map(v=>v.goods_id = v.goods_id.toString())
 			// this.starlist = starlist
-			this.starlength= starlist.length
+			this.starlength = starlist.length.toString()
+			console.log(starlist.length)
 		},
 		methods:{
 			userinfo(e){

@@ -64,7 +64,8 @@
 .uni-tab__right.data-v-279c619b {
   margin: 5px 0;
   margin-right: 10px;
-  border-radius: 100px;
+  -webkit-border-radius: 100px;
+          border-radius: 100px;
   overflow: hidden;
 }
 .uni-tab__cart-button-left.data-v-279c619b {
@@ -147,11 +148,13 @@
   text-align: center;
   font-size: 12px;
   background-color: #ff0000;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
 }
 .uni-tab__dots.data-v-279c619b {
   padding: 0 4px;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
 }
 .uni-tab__color-y.data-v-279c619b {
   background-color: #ffa200;

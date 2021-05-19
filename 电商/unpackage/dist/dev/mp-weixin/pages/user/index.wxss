@@ -42,7 +42,8 @@
   height: 150rpx;
   line-height: 150rpx;
   border: 3px solid #F0AD4E;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   font-size: 28rpx;
 }
 .user .top {
@@ -75,7 +76,8 @@
 }
 .user .top .picture image {
   width: 100%;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .user .editbox .orderedit {
   display: -webkit-box;
@@ -83,7 +85,8 @@
   display: flex;
   padding: 30rpx 0;
   margin-bottom: 10px;
-  box-shadow: 5px 5px 8px #999;
+  -webkit-box-shadow: 5px 5px 8px #999;
+          box-shadow: 5px 5px 8px #999;
 }
 .user .editbox .orderedit view {
   -webkit-box-flex: 1;

@@ -37,7 +37,7 @@
   height: 80vh;
 }
 .cart .nonegoods image {
-  width: 100%;
+  width: 60%;
 }
 .cart .cart_list .list {
   display: -webkit-box;
@@ -99,8 +99,11 @@
   display: inline-block;
   border: 1px solid #999;
   height: 40rpx;
+  line-height: 40rpx;
   width: 40rpx;
   margin: 0px 10rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .cart .footer {
   position: fixed;
