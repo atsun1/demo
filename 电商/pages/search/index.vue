@@ -52,15 +52,23 @@
 		},
 		methods:{
 			// 检测value值改动进行搜索
-			// searchinfo(e){
-			// 	console.log(e)
-			// 	this.searchlist = []
-			// 	this.params.query = e
-			// 	this.getlist()
-			// },
+			// #ifdef H5
+			searchinfo(e){
+				console.log(e)
+				this.searchlist = []
+				if(!e){
+					return
+				}
+				this.params.query = e
+				this.getlist()
+			},
+			// #endif
 			// 点击搜索 进行搜索
 			search(e){
 				this.searchlist = []
+				if(!e){
+					return
+				}
 				this.params.query = e.value;
 				this.getlist()
 			},
