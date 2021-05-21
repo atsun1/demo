@@ -45,7 +45,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "练手",
+		"navigationBarTitleText": "小demo",
 		"navigationBarBackgroundColor": "#eb4450",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {

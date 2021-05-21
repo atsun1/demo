@@ -18,9 +18,14 @@
 			</view>
 			<view class="stars">
 				<view @click="star(goodsinfo.goods_id)" >
-					<uni-icons type="star" size="20" color="#999" ></uni-icons>
-					<!-- <uni-icons type="star-filled" size="20" color="#EB4450" ></uni-icons> -->
-					<view>收藏</view>
+					<view v-if="!this.isstar">
+						<uni-icons type="star" size="20" color="#999" ></uni-icons>
+						<view>收藏</view>
+					</view>
+					<view v-if="this.isstar">
+						<uni-icons type="star-filled" size="20"  color="red" ></uni-icons>
+						<view style="color:red">收藏</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -46,6 +51,7 @@
 		},
 		data(){
 			return{
+				isstar:false,
 				goodsinfo:[],
 				options: [
 							{
@@ -75,7 +81,8 @@
 								backgroundColor: '#ffa200',
 								color: '#fff'
 							}
-				]
+				],
+				
 			}
 		},
 		methods:{
@@ -122,6 +129,7 @@
 			},
 			star(id){
 				console.log(this.goodsinfo)
+				this.isstar = !this.isstar;
 				let starlist = uni.getStorageSync("starlist")||[];
 				let index = starlist.findIndex(v=>v.goods_id == id)
 				if(!this.goodsinfo.star){

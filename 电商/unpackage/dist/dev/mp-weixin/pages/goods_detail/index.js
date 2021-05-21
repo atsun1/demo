@@ -194,6 +194,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 {
   components: {
     uniGoodsNav: uniGoodsNav },
@@ -204,6 +209,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isstar: false,
       goodsinfo: [],
       options: [
       {
@@ -232,6 +238,7 @@ __webpack_require__.r(__webpack_exports__);
         text: '立即购买',
         backgroundColor: '#ffa200',
         color: '#fff' }] };
+
 
 
 

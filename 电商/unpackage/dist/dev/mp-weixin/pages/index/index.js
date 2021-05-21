@@ -240,6 +240,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         console.log(res.data.message);
         _this3.floordata = res.data.message;
       });
+    },
+    gotogoodsinfo: function gotogoodsinfo(id) {
+      console.log(id);
+      // uni.navigateTo({
+      // 	url:'/pages/goods_detail/index?goods_id='+id
+      // })
+    },
+    gotosearch: function gotosearch(query) {
+      console.log(query);
     } } };exports.default = _default;
 
 /***/ }),

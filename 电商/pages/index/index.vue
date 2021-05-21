@@ -4,13 +4,13 @@
 		<view class="banner">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="500">
 				<swiper-item v-for="(ite , index ) in banner" :key="index">
-					<image :src="ite.image_src" mode="widthFix"></image>
+					<image :src="ite.image_src" mode="widthFix" @click="gotogoodsinfo(ite.goods_id)"></image>
 				</swiper-item>
 			</swiper>
 		</view>
 		<view class="homenav">
 			<uni-grid :column="4" :showBorder="false">
-			    <uni-grid-item v-for="(ite , index) in homenav" :key="index">
+			    <uni-grid-item v-for="(ite , index) in homenav" :key="index"  >
 			        <navigator :url="ite.navigator_url" :open-type="ite.open_type">
 						<image :src="ite.image_src" mode="widthFix"></image>
 					</navigator>
@@ -24,9 +24,9 @@
 					<image :src="ite1.floor_title.image_src" mode="widthFix"></image>
 				</view>
 				<view class="fson" v-for="(ite2 , index) in ite1.product_list" :key="index">
-					<navigator :url="ite2.cat_id" :open-type="ite2.open_type">
-						<image :src="ite2.image_src" mode="" ></image>
-					</navigator>
+					<!-- <navigator :url="ite2.cat_id" :open-type="ite2.open_type"> -->
+						<image :src="ite2.image_src" mode="" @click="gotosearch()"></image>
+					<!-- </navigator> -->
 				</view>
 			</view>
 			
@@ -76,6 +76,15 @@
 					console.log(res.data.message)
 					this.floordata = res.data.message
 				})
+			},
+			gotogoodsinfo(id){
+				console.log(id)
+				// uni.navigateTo({
+				// 	url:'/pages/goods_detail/index?goods_id='+id
+				// })
+			},
+			gotosearch(query){
+				console.log(query)
 			}
 		}
 
