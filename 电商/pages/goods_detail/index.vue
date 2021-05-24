@@ -18,11 +18,11 @@
 			</view>
 			<view class="stars">
 				<view @click="star(goodsinfo.goods_id)" >
-					<view v-if="!this.isstar">
+					<view v-if="!isstar">
 						<uni-icons type="star" size="20" color="#999" ></uni-icons>
 						<view>收藏</view>
 					</view>
-					<view v-if="this.isstar">
+					<view v-if="isstar">
 						<uni-icons type="star-filled" size="20"  color="red" ></uni-icons>
 						<view style="color:red">收藏</view>
 					</view>
@@ -46,8 +46,14 @@
 			uniGoodsNav
 		},
 		onLoad(e){
-			console.log(e);
 			this.getgoodsinfo(e)
+			let starlist = uni.getStorageSync('starlist')||[];
+			let index = starlist.findIndex(v=>v.goods_id == e.goods_id)
+			console.log(index);
+			if(index == -1){
+				return
+			}
+			this.isstar = true
 		},
 		data(){
 			return{

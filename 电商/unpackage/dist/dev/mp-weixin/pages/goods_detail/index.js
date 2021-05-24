@@ -204,8 +204,14 @@ __webpack_require__.r(__webpack_exports__);
     uniGoodsNav: uniGoodsNav },
 
   onLoad: function onLoad(e) {
-    console.log(e);
     this.getgoodsinfo(e);
+    var starlist = uni.getStorageSync('starlist') || [];
+    var index = starlist.findIndex(function (v) {return v.goods_id == e.goods_id;});
+    console.log(index);
+    if (index == -1) {
+      return;
+    }
+    this.isstar = true;
   },
   data: function data() {
     return {
@@ -287,6 +293,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     star: function star(id) {
       console.log(this.goodsinfo);
+      this.isstar = !this.isstar;
       var starlist = uni.getStorageSync("starlist") || [];
       var index = starlist.findIndex(function (v) {return v.goods_id == id;});
       if (!this.goodsinfo.star) {
