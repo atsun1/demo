@@ -90,31 +90,42 @@
 					})
 					return
 				}
-				const token = uni.getStorageSync("token")
-				if(!token){
-					uni.navigateTo({
-						url:'/pages/auth/index'
-					})
-					return
-				}
-				const header = {Authorization :token}
-				const order_price = this.total;
-				const consignee_addr = this.address.detailInfo
-				const cart = this.cart ;
-				let goods = []
-				cart.forEach(v=>goods.push({
-					goods_id : v.goods_id,
-					goods_number : v.num,
-					goods_price : v.goods_price
-				}))
-				const orderdata = {order_price,consignee_addr,goods};
-				this.req({
-					url:'/api/public/v1/my/orders/create',
-					data:orderdata,
-					method:"POST"
-				}).then(res=>{
-					console.log(res)
+				uni.showToast({
+					title:'流程结束'
 				})
+				setTimeout( ()=>{
+					uni.switchTab({
+						url:'/pages/cart/index'
+					})
+				},2000)
+				
+				
+				
+				// const token = uni.getStorageSync("token")
+				// if(token){
+				// 	uni.navigateTo({
+				// 		url:'/pages/auth/index'
+				// 	})
+				// 	return
+				// }
+				// const header = {Authorization :token}
+				// const order_price = this.total;
+				// const consignee_addr = this.address.detailInfo
+				// const cart = this.cart ;
+				// let goods = []
+				// cart.forEach(v=>goods.push({
+				// 	goods_id : v.goods_id,
+				// 	goods_number : v.num,
+				// 	goods_price : v.goods_price
+				// }))
+				// const orderdata = {order_price,consignee_addr,goods};
+				// this.req({
+				// 	url:'/api/public/v1/my/orders/create',
+				// 	data:orderdata,
+				// 	method:"POST"
+				// }).then(res=>{
+				// 	console.log(res)
+				// })
 			}
 			
 		}

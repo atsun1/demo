@@ -68,6 +68,7 @@
 	
 			update(){
 				let cart = uni.getStorageSync("cart")||[]
+				console.log(cart)
 				//判断是否显示 无购物车内容图片 
 				cart.length?this.isShow=true:this.isShow=false;
 				let  allcheck = cart.length?cart.every(v=>v.checked):false

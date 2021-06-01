@@ -200,6 +200,7 @@ var _default =
 
     update: function update() {var _this = this;
       var cart = uni.getStorageSync("cart") || [];
+      console.log(cart);
       //判断是否显示 无购物车内容图片 
       cart.length ? this.isShow = true : this.isShow = false;
       var allcheck = cart.length ? cart.every(function (v) {return v.checked;}) : false;

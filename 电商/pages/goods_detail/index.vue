@@ -178,8 +178,17 @@
 					})
 				};
 				if(e.index == 1){
-					let cart = uni.getStorageSync("cart")
-					console.log(cart)
+					let cart = uni.getStorageSync("cart")||[];
+					
+					this.goodsinfo.checked =true;
+					this.goodsinfo.num = 0;
+					this.goodsinfo.num++;
+					cart.push(this.goodsinfo)
+					console.log(this.goodsinfo.num)
+					uni.setStorageSync("cart",cart);
+					uni.switchTab({
+						url:'/pages/cart/index'
+					})
 				};
 				// this.options[2].info++
 			}

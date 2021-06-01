@@ -336,8 +336,17 @@ __webpack_require__.r(__webpack_exports__);
         });
       };
       if (e.index == 1) {
-        var _cart = uni.getStorageSync("cart");
-        console.log(_cart);
+        var _cart = uni.getStorageSync("cart") || [];
+
+        this.goodsinfo.checked = true;
+        this.goodsinfo.num = 0;
+        this.goodsinfo.num++;
+        _cart.push(this.goodsinfo);
+        console.log(this.goodsinfo.num);
+        uni.setStorageSync("cart", _cart);
+        uni.switchTab({
+          url: '/pages/cart/index' });
+
       };
       // this.options[2].info++
     } } };exports.default = _default;

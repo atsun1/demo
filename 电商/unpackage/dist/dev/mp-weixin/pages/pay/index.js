@@ -222,31 +222,42 @@ var _default =
 
         return;
       }
-      var token = uni.getStorageSync("token");
-      if (!token) {
-        uni.navigateTo({
-          url: '/pages/auth/index' });
+      uni.showToast({
+        title: '流程结束' });
 
-        return;
-      }
-      var header = { Authorization: token };
-      var order_price = this.total;
-      var consignee_addr = this.address.detailInfo;
-      var cart = this.cart;
-      var goods = [];
-      cart.forEach(function (v) {return goods.push({
-          goods_id: v.goods_id,
-          goods_number: v.num,
-          goods_price: v.goods_price });});
+      setTimeout(function () {
+        uni.switchTab({
+          url: '/pages/cart/index' });
 
-      var orderdata = { order_price: order_price, consignee_addr: consignee_addr, goods: goods };
-      this.req({
-        url: '/api/public/v1/my/orders/create',
-        data: orderdata,
-        method: "POST" }).
-      then(function (res) {
-        console.log(res);
-      });
+      }, 2000);
+
+
+
+      // const token = uni.getStorageSync("token")
+      // if(token){
+      // 	uni.navigateTo({
+      // 		url:'/pages/auth/index'
+      // 	})
+      // 	return
+      // }
+      // const header = {Authorization :token}
+      // const order_price = this.total;
+      // const consignee_addr = this.address.detailInfo
+      // const cart = this.cart ;
+      // let goods = []
+      // cart.forEach(v=>goods.push({
+      // 	goods_id : v.goods_id,
+      // 	goods_number : v.num,
+      // 	goods_price : v.goods_price
+      // }))
+      // const orderdata = {order_price,consignee_addr,goods};
+      // this.req({
+      // 	url:'/api/public/v1/my/orders/create',
+      // 	data:orderdata,
+      // 	method:"POST"
+      // }).then(res=>{
+      // 	console.log(res)
+      // })
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
