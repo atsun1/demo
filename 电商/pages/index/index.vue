@@ -29,7 +29,6 @@
 					<!-- </navigator> -->
 				</view>
 			</view>
-			
 		</view>
 	</view>
 </template>
