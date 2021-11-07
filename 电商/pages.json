@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/user/index"
+		},
+		{
 			"path": "pages/index/index"
 		},
 		{
@@ -27,9 +30,9 @@
 		{
 			"path": "pages/search/index"
 		},
-		{
-			"path": "pages/user/index"
-		},
+		// {
+		// 	"path": "pages/user/index"
+		// },
 		{
 			"path": "pages/feedback/index"
 		},

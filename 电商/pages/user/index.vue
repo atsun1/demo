@@ -50,8 +50,17 @@
 				    <uni-list-item title="关于我们" clickable ></uni-list-item>
 					<uni-list-item title="列表右侧显示角标" show-badge="true" badge-text="12" ></uni-list-item>
 					<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" ></uni-list-item>
-					<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/vue/index/index"  ></uni-list-item>
+					<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/index"  ></uni-list-item>
 				</uni-list>
+				<button @click="pay('WX_APP')" >
+					微信支付
+				</button>
+				<button @click="pay('ALI_APP')">
+					支付宝支付
+				</button>
+				<view>支付金额：{{total}}</view>
+				<view>订单号：{{order_id}}</view>
+				
 			</view>
 		</view>
 	</view>
@@ -63,7 +72,10 @@
 			return {
 				userdata:{},
 				// starlist:[],
-				starlength:0
+				starlength:0,
+				total:1,
+				order_id:0,
+				app_id:'44f01a13-965f-4b27-ba9f-da678b47f3f5'
 			}
 		},
 		onShow(){
@@ -74,12 +86,70 @@
 			this.starlength = starlist.length.toString()
 			console.log(starlist.length)
 		},
+		onLoad() {
+			this.order_id = Number( Math.random()*100000000000 ).toFixed()
+		},
 		methods:{
 			userinfo(e){
 				this.userdata = e.detail.userInfo;
 				console.log(this.userdata,e)
+			},
+			pay(e){
+				var payData ={
+					app_id : this.app_id,
+					channel : e,
+					title : '测试商品',
+					total_fee : this.total,
+					bill_no : this.order_id
+				}
 				
+				if(e == 'WX_APP'){
+					console.log('微信')
+					uni.request({
+						url :'https://apisz.beecloud.cn/2/rest/app/bill',
+						data:JSON.stringify(payData),
+						method:'POST',
+						success:(res)=>{
+							console.log(res)
+							if(res.data.result_code === 0){
+								console.log('成功回调')
+							}
+						},
+						fail:(err)=>{
+							console.log(err)
+						}
+					})
+					
+				}else if(e == 'ALI_APP'){
+					console.log('支付宝')
+					uni.request({
+						url :'https://apisz.beecloud.cn/2/rest/app/bill',
+						data:JSON.stringify(payData),
+						method:'POST',
+						success:(res)=>{
+							console.log(res)
+							if(res.data.result_code === 0){
+								console.log('成功回调')
+							}
+						},
+						fail:(err)=>{
+							console.log(err)
+						}
+					})
+				}
+				
+				// uni.requestPayment({
+				//     provider: 'alipay',
+				//     orderInfo: 'orderInfo', //微信、支付宝订单数据 【注意微信的订单信息，键值应该全部是小写，不能采用驼峰命名】
+				//     success: function (res) {
+				//         console.log('success:' + JSON.stringify(res));
+				//     },
+				//     fail: function (err) {
+				//         console.log('fail:' + JSON.stringify(err));
+				//     }
+				// });
 			}
+			
 		}
 		
 	}
